@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel Ajanda</title>
+    <!-- FullCalendar CSS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="app-logo">
+                <h2>Ajandam</h2>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" id="btn-calendar">
+                    <span>📅</span> Takvim
+                </button>
+                <button class="nav-item" id="btn-reports">
+                    <span>📊</span> Raporlar
+                </button>
+            </nav>
+            
+            <div class="mini-status">
+                <p id="clock">00:00</p>
+                <small id="date-display">1 Ocak 2024</small>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="view-title">
+                    <h1 id="page-title">Takvim</h1>
+                </div>
+                <div class="actions">
+                    <button id="btn-new-task" class="btn-primary">+ Yeni Görev</button>
+                </div>
+            </header>
+
+            <!-- Calendar Container -->
+            <div id="calendar-view" class="content-view active">
+                <div id='calendar'></div>
+            </div>
+
+            <!-- Reports Container -->
+            <div id="reports-view" class="content-view">
+                <div class="report-filters">
+                    <label>Başlangıç: <input type="date" id="report-start"></label>
+                    <label>Bitiş: <input type="date" id="report-end"></label>
+                    <button class="btn-secondary" id="btn-get-report">Raporla</button>
+                </div>
+                <div id="report-results">
+                    <!-- Rapor grafikleri veya listesi buraya gelecek -->
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Durum</th>
+                                <th>Sayı</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-body">
+                            <!-- JS ile doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Yeni Görev</h2>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                
+                <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" id="task-title" required placeholder="Toplantı, Ders vb.">
+                </div>
+
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <textarea id="task-desc" rows="3"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label>Başlangıç</label>
+                        <input type="datetime-local" id="task-start" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bitiş</label>
+                        <input type="datetime-local" id="task-end" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Durum</label>
+                    <select id="task-status">
+                        <option value="pending">Bekliyor</option>
+                        <option value="done">Yapıldı</option>
+                        <option value="cancelled">İptal</option>
+                        <option value="postponed">Ertelendi</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="btn-delete" class="btn-danger hidden">Sil</button>
+                    <button type="submit" class="btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Permission Banner -->
+    <div id="notification-banner" class="banner hidden">
+        <p>Bildirimleri almak için izin vermeniz gerekiyor.</p>
+        <button id="btn-allow-notify">İzin Ver</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
